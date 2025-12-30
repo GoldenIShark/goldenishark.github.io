@@ -17,12 +17,12 @@
 
     // 🔥 Firebase Config (GANTI PUNYAMU)
     const firebaseConfig = {
-      apiKey: "API_KEY_KAMU",
+      apiKey: "AIzaSyD1ov5494poj9d1homIMhUajAvTvuf2W9M",
       authDomain: "notifikasi-website-goldenshark.firebaseapp.com",
       projectId: "notifikasi-website-goldenshark",
       storageBucket: "notifikasi-website-goldenshark.appspot.com",
-      messagingSenderId: "SENDER_ID",
-      appId: "APP_ID"
+      messagingSenderId: "20732522648",
+      appId: "1:20732522648:web:cd18913a4f3636cdd6a0ed"
     };
 
     // Init Firebase
@@ -39,13 +39,13 @@
         if (token) {
           document.getElementById("token").textContent = token;
           alert("✅ TOKEN BERHASIL DIDAPATKAN");
-          console.log(token);
+          alert(token);
         } else {
           alert("❌ Token tidak tersedia");
         }
       } catch (err) {
         alert("ERROR: " + err.message);
-        console.error(err);
+        alert(err);
       }
     };
 
