@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase Notifikasi Test</title>
+</head>
+<body>
+  <h2>Firebase Push Notification</h2>
+  <button onclick="requestToken()">Ambil Token</button>
+
+  <pre id="token"></pre>
+
+  <script type="module">
+    // 🔥 Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging.js";
+
+    // 🔥 Firebase Config (GANTI PUNYAMU)
+    const firebaseConfig = {
+      apiKey: "API_KEY_KAMU",
+      authDomain: "notifikasi-website-goldenshark.firebaseapp.com",
+      projectId: "notifikasi-website-goldenshark",
+      storageBucket: "notifikasi-website-goldenshark.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+
+    // Init Firebase
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
+    // 🔔 Ambil Token
+    window.requestToken = async () => {
+      try {
+        const token = await getToken(messaging, {
+          vapidKey: "BMyozaBhpcxiBiX8Y59ry67UpnjPWMFw5kwdl2MSqScsCMQAzf1LfRqJuSgNuAFOjIwiTqq33Uk39s5hcMn1s-w"
+        });
+
+        if (token) {
+          document.getElementById("token").textContent = token;
+          alert("✅ TOKEN BERHASIL DIDAPATKAN");
+          console.log(token);
+        } else {
+          alert("❌ Token tidak tersedia");
+        }
+      } catch (err) {
+        alert("ERROR: " + err.message);
+        console.error(err);
+      }
+    };
+
+    // 🔔 NOTIFIKASI SAAT WEB DIBUKA (FOREGR0UND)
+    onMessage(messaging, (payload) => {
+      alert(
+        "🔔 NOTIFIKASI MASUK\n\n" +
+        payload.notification.title + "\n" +
+        payload.notification.body
+      );
+    });
+  </script>
+</body>
+</html>
